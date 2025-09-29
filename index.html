@@ -9,11 +9,19 @@
 {% endblock scripts %}
 
 {% block content %}
-<section> 
+<section class="container"> 
+  <h1>This is not a headline</h1>
   <p>The last piece of the puzzle is the scrollama callback functions. In the first one, we can trigger changes to the chart by handling which step becomes active. In the enter and exit callback functions, we stick and unstick the graphic, respectively.</p>
 </section>
 
 <section id='scroll'>
+	<!--  graphic container  -->
+	<div class='scroll__graphic'>
+		<!--   actual graphic/chart   -->
+		<div class='chart'>
+			<p>0</p>
+		</div>
+	</div>
 	<!--  step/text container  -->
 	<div class='scroll__text'>
 		<div class='step' data-step='1'>
@@ -29,15 +37,9 @@
 			<p>STEP 4</p>
 		</div>
 	</div>
-	<!--  graphic container  -->
-	<div class='scroll__graphic'>
-		<!--   actual graphic/chart   -->
-		<div class='chart'>
-			<p>0</p>
-		</div>
-	</div>
 </section>
-<section> 
+
+<section class="container">
   <p>The last piece of the puzzle is the scrollama callback functions. In the first one, we can trigger changes to the chart by handling which step becomes active. In the enter and exit callback functions, we stick and unstick the graphic, respectively.</p>
 </section>
 {% endblock content %}

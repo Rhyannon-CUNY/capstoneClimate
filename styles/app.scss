@@ -7,26 +7,23 @@
 @use './variables/colors';
 @use './variables/fonts';
 
+.container {
+  max-width: 630px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 // YOUR CODE
 // Starting writing your stuff below here
 #scroll {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   background-color: #f3f3f3;
   padding: 1rem;
 }
 
-#scroll > * {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
 .scroll__graphic {
-  position: -webkit-sticky;
   position: sticky;
+  left: 0;
   width: 100%;
   margin: 0;
   -webkit-transform: translate3d(0, 0, 0);
@@ -34,15 +31,6 @@
   transform: translate3d(0, 0, 0);
   background-color: #8a8a8a;
   z-index: 0;
-}
-
-.scroll__graphic.is-fixed {
-  position: fixed;
-}
-
-.scroll__graphic.is-bottom {
-  bottom: 0;
-  top: auto;
 }
 
 .scroll__graphic .chart {
@@ -54,20 +42,22 @@
   -moz-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  font-size: 1rem;
+  font-size: 8rem;
   font-weight: 900;
   color: #fff;
 }
 
 .scroll__text {
-  padding: 0 1rem;
-  max-width: 30rem;
+  position: relative;
+  padding: 0;
+  max-width: 20rem;
+  margin: 0 auto;
 }
 
 .step {
   margin: 0 auto 2rem auto;
-  background-color: #3b3b3b;
   color: #fff;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .step p {

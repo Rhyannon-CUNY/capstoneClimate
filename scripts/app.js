@@ -78,8 +78,6 @@ function init() {
       debug: false, // display the trigger offset for testing
     })
     .onStepEnter(handleStepEnter);
-  //.onContainerEnter(handleContainerEnter)
-  //.onContainerExit(handleContainerExit);
 
   // setup resize event
   window.addEventListener('resize', handleResize);
