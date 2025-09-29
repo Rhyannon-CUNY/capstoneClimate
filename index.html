@@ -9,40 +9,35 @@
 {% endblock scripts %}
 
 {% block content %}
-<article>
-  <header class="container">
-    <h1 class="headline">{{ meta.headline }}</h1>
-    <img src="{% static 'assets/images/baker.jpg' %}" alt="Baker logo" width=250 />
-    <div class="attribution">
-        {% set comma = joiner() %}
-        <p class="byline">
-          By {%- for author in meta.byline -%}
-          {% if not loop.last %}{{ comma() }}{% elif not loop.first %} and{% endif %} <span class="author" itemscope itemtype="http://schema.org/Person"><a itemprop="url" href="{{ author.url }}">{{ author.name }}</a></span>
-          {%- endfor -%}
-        </p>
-    </div>
-  </header>
-  <div class="container">
-    {% for p in copy.body %}
-        <p class="prose">{{ p.value }}</p>
-    {% endfor %}
-    <table class="table">
-        <caption>Wheat production</caption>
-        <thead>
-            <tr>
-                <th>Year</th>
-                <th>Yield</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for obj in example %}
-            <tr>
-                <td>{{ obj.year }}</td>
-                <td>{{ obj.wheat }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-  </div>
-</article>
+<section> 
+  <p>The last piece of the puzzle is the scrollama callback functions. In the first one, we can trigger changes to the chart by handling which step becomes active. In the enter and exit callback functions, we stick and unstick the graphic, respectively.</p>
+</section>
+
+<section id='scroll'>
+	<!--  step/text container  -->
+	<div class='scroll__text'>
+		<div class='step' data-step='1'>
+			<p>This is a map of a distant Chinese miltary base</p>
+		</div>
+		<div class='step' data-step='2'>
+			<p>STEP 2</p>
+		</div>
+		<div class='step' data-step='3'>
+			<p>STEP 3</p>
+		</div>
+		<div class='step' data-step='4'>
+			<p>STEP 4</p>
+		</div>
+	</div>
+	<!--  graphic container  -->
+	<div class='scroll__graphic'>
+		<!--   actual graphic/chart   -->
+		<div class='chart'>
+			<p>0</p>
+		</div>
+	</div>
+</section>
+<section> 
+  <p>The last piece of the puzzle is the scrollama callback functions. In the first one, we can trigger changes to the chart by handling which step becomes active. In the enter and exit callback functions, we stick and unstick the graphic, respectively.</p>
+</section>
 {% endblock content %}
