@@ -1,58 +1,70 @@
 {% extends 'base.html' %}
 
 {% block styles %}
+<link href="https://unpkg.com/maplibre-gl@^5.8.0/dist/maplibre-gl.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'styles/app.scss' %}">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mansalva&family=Roboto:wght@600&display=swap" rel="stylesheet">
 {% endblock styles %}
 
 {% block scripts %}
+<script src="https://unpkg.com/maplibre-gl@^5.8.0/dist/maplibre-gl.js"></script> 
 {% script 'app' %}
 {% endblock scripts %}
 
 {% block content %}
 <section class="container"> 
-  <h1>Incel websites are hosted in Russia</h1>
-  <h3>The manosphere may be another destabilizing influence originating from Russia</h3>
-  <p>Websites that tout extremist mysogyny, homophobia and racism have millions of visitors every month. But a network of these websites have troubling connections in ownership, leading to Russian origins. </p>
+	<h1>How has your <br>climate changed?</h1>
+	<h3>Winters are warmer and weather disasters are happening more often. 
+		<br>
+		<br>But by how much?</h3>   
+		{% for p in copy.top_text %}
+		<p>{{ p.value}}</p>
+		{% endfor %}
 </section>
-
-<section id="scroll1" class="scroll">
-	<!--  graphic container  -->
+<section class="container">
+	<div class="input-section">
+	  <form id="climate-form">
+		<div class="form-group">
+		  <label for="birth-year">What year were you born?</label>
+		  <select id="birth-year" name="birthYear">
+			<option value="">Select a year</option>
+		  </select>
+		</div>
+		<div class="form-group">
+		  <label for="state">What state were you born in?</label>
+		  <select id="state" name="state">
+			<option value="">Select a state</option>
+		  </select>
+		</div>
+		
+		<button type="submit">Show My Climate Story</button>
+	  </form>
+	</div>
+  </section>
+<section class="scroll" id="scroll1">
+<!--  graphic container  -->
 	<div class='scroll__graphic'>
-		<!--   actual graphic/chart   -->
 		<div class='chart' id="chart1">
-			<p>A world map with USA highlighted</p>
+			<div id="map"></div>
 		</div>
 	</div>
 	<!--  step/text container  -->
-	<div class='scroll__text'>
-		<div class='step' data-step='1'>
-			<p>The largest userbase for incel websites are in the U.S. Around one-third of web traffic for the main incel or incel-linked websites came from the country, but VPN use could be clouding the data.</p>
-		</div>
-		<div class='step' data-step='2'>
-			<p>Threat assessment of incels and the manosphere by intelligence agencies. How manosphere websites are linked to extremist content and real-world violence.
-			</p>
-		</div>
-		<div class='step' data-step='3' style="opacity: 0;">
-			<p>STEP 3</p>
-		</div>
-		<div class='step' data-step='4'>
-			<p>The four websites are all registered under Lamarcus Small according to US paperwork. The suicide forum came to international attention when families of victims started lobbying governments to ban the page</p>
-		</div>
-		<div class='step' data-step='5' style="margin-bottom: 0;">
-			<p>It was widely reported at the time as run by an American national registered as a business in the US. 
-				<br>Experts warn that incel language is entering the mainstream. Alpha male, looksmaxing, terms popular in the manosphere and found across social media channels all originate from subgenres of incel forums.</p>
-		</div>
+	<div class='scroll__text' id="steps1">
+			{% for p in copy.steps1 %}
+	<div class='step' data-step='{loop.index}'>
+	<p>{{p.value}}</p>
+	</div>
+			{% endfor %}
 	</div>
 </section>
-	<section class="container"> 
-	<p>Incels, or "involuntary celibate", has existed as online community for decades. Its original creator, a female Canadian university student, created the term and a website to connect with people who were similarly frustrated with a lack of romantic and sexual experiences.
-		<br>It then took a dark turn.
-		<br>The incel community was mainly on Reddit for a while, before it was banned from the forum after high-profile incel-linked violence in the U.S. The community then spread across the internet, with incels.is and looksmaxxing.org appearing as prominent locations for the community. 
-	</p>
-	</section>
-
-<section id="scroll2" class="scroll">
+<section class="container"> 
+		{% for p in copy.mid_text1 %}
+	<p>{{ p.value }}</p>
+		{% endfor %}
+</section>
+<section class="scroll" id="scroll2">
 		<!--  graphic container  -->
 	<div class='scroll__graphic'>
 		<!--   actual graphic/chart   -->
@@ -61,23 +73,17 @@
 		</div>
 	</div>
 	<!--  step/text container  -->
-	<div class='scroll__text'>
-		<div class='step' data-step='6'>
-			<p>The website with the most traffic is Looksmaxxing.org, refered to as 'dot org' by those in the know. It says it is a space for male users to maximize their visual potential.
-				<br>To post on the forum, you have to become a member. To become a member, you have to tick a box saying you are a man.</p>
+	<div class='scroll__text' id ="steps2">
+		{% for p in copy.steps2 %}
+		<div class='step' data-step='{loop.index}'>
+			<p>{{p.value}}</p>
 		</div>
-		<div class='step' data-step='7'>
-			<p>At any given time, the website tracks how many members and non-members are on the site. 
-				<br>A "bllue pill" and "red pill" counter references incel language based on the Matrix film universe. Those you have swallowed the red pill see the truth of the world, whereas those who chose the blue pill do not.</p>
-		</div>
-		<div class='step' data-step='8'>
-			<p>Demographics: around half of visitors to incel.is are between 18 and 24 years old. Four in five are male. 
-				<br>They most visit adult websites, social media networks or video game streaming websites before or after visiting the forum. 
-			</p>
-		</div>
-		<div class='step' data-step='9'>
-			<p>An analysis of language on the forum by the Center for Countering Digital Hate shows that XYZ.</p>
-		</div>
+		{% endfor %}
 	</div>
+</section>
+<section class="container"> 
+	{% for p in copy.mid_text2 %}
+	<p>{{ p.value}}</p>
+	{% endfor %}
 </section>
 {% endblock content %}

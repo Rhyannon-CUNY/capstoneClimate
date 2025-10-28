@@ -1,8 +1,31 @@
 // Write your code!
 import scrollama from 'scrollama';
 import * as d3 from 'd3';
+import maplibregl from 'maplibre-gl';
 
-console.log(scrollama);
+const map = new maplibregl.Map({
+  container: 'map', // container id
+  style: 'https://demotiles.maplibre.org/globe.json', // style URL
+  center: [-95.5795, 37.8283], // Center of U.S. [lng, lat]
+  zoom: 3.9, // starting zoom
+  interactive: false, // Disable map interactions
+});
+
+function panAndZoomMap(lng, lat, zoomLevel) {
+  map.flyTo({
+    center: [lng, lat], // New coordinates [lng, lat]
+    zoom: zoomLevel, // New zoom level
+    essential: true, // This ensures the animation is user-friendly
+  });
+}
+
+map.on('load', () => {
+  map.resize();
+  init();
+});
+
+console.log(maplibregl);
+console.log(map);
 
 // using d3 for convenience, and storing a selected elements
 const scrollSections = d3.selectAll('.scroll');
@@ -24,7 +47,6 @@ scrollSections.each(function () {
     step.style('height', stepHeight + 'px');
 
     // 2. update height of graphic element
-
     const graphicHeight = window.innerHeight / 2;
     const graphicMarginTop = (window.innerHeight - graphicHeight) / 2;
 
@@ -47,39 +69,60 @@ scrollSections.each(function () {
 
     // update graphic based on step here
     const activeStep = response.index + 1;
+
+    // get chart ID
+    const chartID = chart.attr('id');
+
+    console.log('Chart ID:', chartID, 'Active Step:', activeStep);
+
     // Clear the chart ...
     chart.selectAll('p').remove();
 
-    if (activeStep == 1) {
-      console.log('DO THE STEP ONE STUFF...');
-      chart.append('p').text('A world map with USA highlighted');
-    } else if (activeStep == 2) {
-      console.log('DO THE STEP TWO STUFF...');
-      chart.append('p').text('A world map with USA highlighted');
-    } else if (activeStep == 3) {
-      console.log('DO THE STEP THREE STUFF...');
-      chart.append('p').text('A network map of 4 websites');
-    } else if (activeStep == 4) {
-      console.log('DO THE STEP FOUR STUFF...');
-      chart.append('p').text('A network map of 4 websites');
-    } else if (activeStep == 5) {
-      console.log('DO THE STEP FIVE STUFF...');
-      chart.append('p').text('A network map of 4 websites');
-    } else if (activeStep == 6) {
-      console.log('DO THE STEP SIX STUFF...');
-      chart.append('p').text('Looksmaxing website');
-    } else if (activeStep == 7) {
-      console.log('DO THE STEP SEVEN STUFF...');
-      chart.append('p').text('Looksmaxing website');
-    } else if (activeStep == 8) {
-      console.log('DO THE STEP EIGHT STUFF...');
-      chart.append('p').text('zoom in on looksmaxing website');
-    } else if (activeStep == 9) {
-      console.log('DO THE STEP NINE STUFF...');
-      chart.append('p').text('zoom in on looksmaxing website');
+    if (chartID === 'chart1') {
+      if (activeStep == 1) {
+        console.log('DO THE STEP ONE STUFF...');
+        chart
+          .append('p')
+          .text('blue overlay on map for winter, animations of snow?');
+      } else if (activeStep == 2) {
+        console.log('DO THE STEP TWO STUFF...');
+        chart
+          .append('p')
+          .text('pink overlay for spring, animation of flowers?');
+      } else if (activeStep == 3) {
+        console.log('DO THE STEP THREE STUFF...');
+        chart
+          .append('p')
+          .text('red overlay for summer, animation of fan blowing?');
+      } else if (activeStep == 4) {
+        console.log('DO THE STEP FOUR STUFF...');
+        chart
+          .append('p')
+          .text('orange overlay for autumn, animation of leaves falling?');
+      }
+    } else if (chartID === 'chart2') {
+      if (activeStep == 1) {
+        console.log('DO THE STEP ONE STUFF...'); //restart the count for chart2
+        chart
+          .append('p')
+          .text('Bar chart of extreme weather events, 1925-2025');
+      } else if (activeStep == 2) {
+        console.log('DO THE STEP TWO STUFF...');
+        chart
+          .append('p')
+          .text('Bar chart of extreme weather events, 1925-2025');
+      } else if (activeStep == 3) {
+        console.log('DO THE STEP THREE STUFF...');
+        chart.append('p').text('Sea level rise, 1925-2025');
+      }
     }
 
-    console.log('activeStep', activeStep);
+    console.log(
+      'After everything - activeStep:',
+      activeStep,
+      'chartID:',
+      chartID
+    );
   }
 
   function init() {
@@ -87,14 +130,16 @@ scrollSections.each(function () {
     // 1. call a resize on load to update width/height/position of elements
     handleResize();
 
+    const containerNode = container.node(); // selectors are specific to containers
+
     // 2. setup the scrollama instance
     // 3. bind scrollama event handlers (this can be chained like below)
     scroller
       .setup({
-        container: '#scroll', // our outermost scrollytelling element
+        container: containerNode, // choose each container
         graphic: '.scroll__graphic', // the graphic
         text: '.scroll__text', // the step container
-        step: '.scroll__text .step', // the step elements
+        step: containerNode.querySelectorAll('.scroll__text .step'), // the step elements chosen for each separate container
         offset: 0.5, // set the trigger to be 1/2 way down screen
         debug: false, // display the trigger offset for testing
       })

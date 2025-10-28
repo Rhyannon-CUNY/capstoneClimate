@@ -1,108 +1,88 @@
 // RESET
 // Smooths out the rough edges across browsers
-@use './tools/normalize';
-
-// VARIABLES
-// Reusable settings
-@use './variables/colors';
-@use './variables/fonts';
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-
-.roboto-regular {
-  font-family: 'Roboto', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings: 'wdth' 100;
-}
-
-.roboto-semibold {
-  font-family: 'Roboto', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
-  font-variation-settings: 'wdth' 100;
-}
-
-.sansation-bold {
-  font-family: 'Sansation', sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
+// @import './tools/normalize';
+// @import './variables/colors';
+// @import './variables/fonts';
 
 body {
-  background-color: #9d4edd;
+  background-color: #e9c46a;
 }
-.container {
-  background-color: #9d4edd;
-  max-width: 630px;
-  margin: 0 auto;
-  align-items: center;
-  padding: 3rem;
-}
-.container h1 {
-  padding-bottom: 2rem;
-  font-family: 'Sansation', sans-serif;
-  font-weight: 700;
+.mansalva-regular {
+  font-family: 'Mansalva', sans-serif;
+  font-weight: 400;
   font-style: normal;
-  font-size: 3rem;
-  line-height: 1.2;
-  text-align: center;
-  color: #5a189a;
-  text-shadow: #ffff 2px 0 20px;
 }
 
-.container h3 {
+.roboto-p {
   font-family: 'Roboto', sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
   font-variation-settings: 'wdth' 100;
-  line-height: 1.5;
+}
+
+h1 {
+  font-family: 'Mansalva', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4rem;
+  color: #2a9d8f;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  color: #264653;
   text-align: center;
 }
-.container p {
-  padding: 2rem 0 0 0;
+
+p {
   font-family: 'Roboto', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings: 'wdth' 100;
-  line-height: 1.5;
-  text-align: justify;
+  color: #264653;
+}
+.container {
+  max-width: 630px;
+  margin: 0 auto;
+  padding: 4rem 3rem;
 }
 
 // YOUR CODE
 // Starting writing your stuff below here
 #scroll {
   position: relative;
-  // background-color: #613dc1;
-  // padding: 1rem;
+  background-color: #f3f3f3;
+  padding: 1rem;
 }
 
 .scroll__graphic {
   position: sticky;
   left: 0;
-  width: 100%;
-  margin: 0;
+  top: 0;
+  margin: 0 3rem;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  background-color: #8a8a8a;
+  background-color: #737272;
   z-index: 0;
 }
 
 .scroll__graphic .chart {
   text-align: center;
   padding: 1rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -moz-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  font-size: 4rem;
+  position: relative;
+  // height: 80vh;
+  // width: 90vw;
+  // -moz-transform: translate(-50%, -50%);
+  // // -webkit-transform: translate(-50%, -50%);
+  // transform: translate(-50%, -50%);
+  font-size: 2rem;
   font-weight: 900;
   color: #fff;
 }
@@ -112,12 +92,19 @@ body {
   padding: 0;
   max-width: 20rem;
   margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
 }
 
 .step {
-  margin: 0 auto 15rem auto;
-  color: #ffffff;
+  margin: 110%;
+  color: #e0d5f9;
   background-color: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .step p {
@@ -128,20 +115,22 @@ body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  text-align: justify;
   height: 100%;
-  line-height: 1.5;
-  padding: 2rem;
+  padding: 1rem;
   font-size: 1.25rem;
-  font-family: 'Roboto', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  font-variation-settings: 'wdth' 100;
+  font-weight: 400;
 }
 
 .step.is-active {
-  background-color: #613dc1;
-  color: #ffffff;
-  opacity: 0.8;
+  background-color: #4cd2c2;
+  color: lightgrey;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
