@@ -21,7 +21,6 @@ function panAndZoomMap(lng, lat, zoomLevel) {
 
 map.on('load', () => {
   map.resize();
-  init();
 });
 
 console.log(maplibregl);

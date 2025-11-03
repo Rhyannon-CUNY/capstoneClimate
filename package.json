@@ -9,9 +9,10 @@
   "dependencies": {
     "@datagraphics/baker": "^0.44.1",
     "@datagraphics/delivery": "^0.6.0",
+    "baker-js": "^1.1.1",
     "d3": "^7.9.0",
     "intersection-observer": "^0.12.2",
-    "maplibre-gl": "^5.10.0",
+    "maplibre-gl": "^5.11.0",
     "scrollama": "^3.2.0"
   },
   "devDependencies": {
