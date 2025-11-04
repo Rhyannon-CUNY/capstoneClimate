@@ -25,22 +25,28 @@
 </section>
 <section class="container">
 	<div class="input-section">
-	  <form id="climate-form">
+	  <div id="climate-form">
 		<div class="form-group">
 		  <label for="birth-year">What year were you born?</label>
 		  <select id="birth-year" name="birthYear">
 			<option value="">Select a year</option>
+			{% for year in yearlist %}
+			<option value="{{ year.Year }}">{{ year.Year }}</option>
+			{% endfor %}
 		  </select>
 		</div>
 		<div class="form-group">
 		  <label for="state">What state were you born in?</label>
 		  <select id="state" name="state">
 			<option value="">Select a state</option>
+			{% for state in statelist %}
+			<option value="{{ state.State }}">{{ state.State }}</option>
+			{% endfor %}
 		  </select>
 		</div>
-		
-		<button type="submit">Show My Climate Story</button>
-	  </form>
+		<button id="show">Show My Climate Story</button>
+		<div id="results"></div>
+	</div>
 	</div>
   </section>
 <section class="scroll" id="scroll1">
@@ -64,23 +70,7 @@
 	<p>{{ p.value }}</p>
 		{% endfor %}
 </section>
-<section class="scroll" id="scroll2">
-		<!--  graphic container  -->
-	<div class='scroll__graphic'>
-		<!--   actual graphic/chart   -->
-		<div class='chart' id="chart2">
-			<p></p>
-		</div>
-	</div>
-	<!--  step/text container  -->
-	<div class='scroll__text' id ="steps2">
-		{% for p in copy.steps2 %}
-		<div class='step' data-step='{loop.index}'>
-			<p>{{p.value}}</p>
-		</div>
-		{% endfor %}
-	</div>
-</section>
+
 <section class="container"> 
 	{% for p in copy.mid_text2 %}
 	<p>{{ p.value}}</p>

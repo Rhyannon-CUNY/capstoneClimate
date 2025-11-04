@@ -4,7 +4,7 @@ const entrypoints = [
 ];
 
 export default {
-  ouput: 'docs',
+  output: 'docs',
   domain: 'https://Rhyannon-CUNY.github.io',
   entrypoints: `scripts/${
     entrypoints.length > 1 ? `{${entrypoints.join(',')}}` : entrypoints[0]

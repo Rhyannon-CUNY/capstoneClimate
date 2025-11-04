@@ -2,6 +2,9 @@
 import scrollama from 'scrollama';
 import * as d3 from 'd3';
 import maplibregl from 'maplibre-gl';
+import climate from '../_data/climate.json';
+
+console.log('Climate data:', climate);
 
 const map = new maplibregl.Map({
   container: 'map', // container id
@@ -20,8 +23,27 @@ function panAndZoomMap(lng, lat, zoomLevel) {
 }
 
 map.on('load', () => {
+  map.setProjection('equalEarth');
   map.resize();
+  map.fitBounds([
+    [-125.0011, 24.9493], // Southwest coordinates
+    [-66.9326, 49.5904],
+  ]);
 });
+
+function showData() {
+  const selectYear = document.getElementById('birth-year').value;
+  console.log(selectYear); // e.g., "2"
+  const selectState = document.getElementById('state').value;
+  console.log(selectState); // e.g., "2"
+  const record = climate.find((d) => d.Year == selectYear);
+  console.log(record);
+  const div = document.getElementById('results');
+  div.innerHTML = `Year: ${record.Year}<br>`;
+}
+
+const btn = document.getElementById('show');
+btn.addEventListener('click', showData);
 
 console.log(maplibregl);
 console.log(map);
@@ -80,41 +102,39 @@ scrollSections.each(function () {
     if (chartID === 'chart1') {
       if (activeStep == 1) {
         console.log('DO THE STEP ONE STUFF...');
-        chart
-          .append('p')
-          .text('blue overlay on map for winter, animations of snow?');
+        chart;
+        panAndZoomMap(139.69576323910474, 35.69253813331217, 4);
       } else if (activeStep == 2) {
         console.log('DO THE STEP TWO STUFF...');
-        chart
-          .append('p')
-          .text('pink overlay for spring, animation of flowers?');
+        chart;
+        panAndZoomMap(-95.5795, 37.8283, 4);
       } else if (activeStep == 3) {
         console.log('DO THE STEP THREE STUFF...');
-        chart
-          .append('p')
-          .text('red overlay for summer, animation of fan blowing?');
+        chart;
+        panAndZoomMap(-95.5795, 37.8283, 4);
       } else if (activeStep == 4) {
         console.log('DO THE STEP FOUR STUFF...');
         chart
           .append('p')
           .text('orange overlay for autumn, animation of leaves falling?');
       }
-    } else if (chartID === 'chart2') {
-      if (activeStep == 1) {
-        console.log('DO THE STEP ONE STUFF...'); //restart the count for chart2
-        chart
-          .append('p')
-          .text('Bar chart of extreme weather events, 1925-2025');
-      } else if (activeStep == 2) {
-        console.log('DO THE STEP TWO STUFF...');
-        chart
-          .append('p')
-          .text('Bar chart of extreme weather events, 1925-2025');
-      } else if (activeStep == 3) {
-        console.log('DO THE STEP THREE STUFF...');
-        chart.append('p').text('Sea level rise, 1925-2025');
-      }
     }
+    // } else if (chartID === 'chart2') {
+    //   if (activeStep == 1) {
+    //     console.log('DO THE STEP ONE STUFF...'); //restart the count for chart2
+    //     chart
+    //       .append('p')
+    //       .text('Bar chart of extreme weather events, 1925-2025');
+    //   } else if (activeStep == 2) {
+    //     console.log('DO THE STEP TWO STUFF...');
+    //     chart
+    //       .append('p')
+    //       .text('Bar chart of extreme weather events, 1925-2025');
+    //   } else if (activeStep == 3) {
+    //     console.log('DO THE STEP THREE STUFF...');
+    //     chart.append('p').text('Sea level rise, 1925-2025');
+    //   }
+    // }
 
     console.log(
       'After everything - activeStep:',
