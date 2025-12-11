@@ -1,6 +1,7 @@
 const entrypoints = [
   // Add more script entrypoints here as needed
-  'app',
+  'map',
+  'data',
 ];
 
 export default {

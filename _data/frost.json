@@ -1,0 +1,190 @@
+{
+   "Alabama": {
+      "startWinter": 0,
+      "startSpring": -1
+   },
+   "Arkansas": {
+      "startWinter": 7,
+      "startSpring": -4
+   },
+   "Arizona": {
+      "startWinter": 12,
+      "startSpring": -21
+   },
+   "California": {
+      "startWinter": 16,
+      "startSpring": -28
+   },
+   "Colorado": {
+      "startWinter": 6,
+      "startSpring": -6
+   },
+   "Connecticut": {
+      "startWinter": 16,
+      "startSpring": -13
+   },
+   "Florida": {
+      "startWinter": 15,
+      "startSpring": -11
+   },
+   "Georgia": {
+      "startWinter": -3,
+      "startSpring": 8
+   },
+   "Iowa": {
+      "startWinter": 5,
+      "startSpring": -6
+   },
+   "Idaho": {
+      "startWinter": 12,
+      "startSpring": -3
+   },
+   "Illinois": {
+      "startWinter": 3,
+      "startSpring": -6
+   },
+   "Indiana": {
+      "startWinter": 4,
+      "startSpring": -7
+   },
+   "Kansas": {
+      "startWinter": 6,
+      "startSpring": -2
+   },
+   "Kentucky": {
+      "startWinter": 6,
+      "startSpring": -4
+   },
+   "Louisiana": {
+      "startWinter": 12,
+      "startSpring": -8
+   },
+   "Massachusetts": {
+      "startWinter": 10,
+      "startSpring": -5
+   },
+   "Maryland": {
+      "startWinter": 14,
+      "startSpring": -12
+   },
+   "Maine": {
+      "startWinter": 5,
+      "startSpring": -4
+   },
+   "Michigan": {
+      "startWinter": 9,
+      "startSpring": -6
+   },
+   "Minnesota": {
+      "startWinter": 8,
+      "startSpring": -11
+   },
+   "Missouri": {
+      "startWinter": 5,
+      "startSpring": -6
+   },
+   "Mississippi": {
+      "startWinter": 0,
+      "startSpring": 1
+   },
+   "Montana": {
+      "startWinter": 9,
+      "startSpring": -7
+   },
+   "North Carolina": {
+      "startWinter": 5,
+      "startSpring": -4
+   },
+   "North Dakota": {
+      "startWinter": 17,
+      "startSpring": -15
+   },
+   "Nebraska": {
+      "startWinter": 5,
+      "startSpring": -3
+   },
+   "New Hampshire": {
+      "startWinter": 13,
+      "startSpring": -10
+   },
+   "New Jersey": {
+      "startWinter": 12,
+      "startSpring": -6
+   },
+   "New Mexico": {
+      "startWinter": 6,
+      "startSpring": -11
+   },
+   "Nevada": {
+      "startWinter": 10,
+      "startSpring": -3
+   },
+   "New York": {
+      "startWinter": 12,
+      "startSpring": -7
+   },
+   "Ohio": {
+      "startWinter": 11,
+      "startSpring": -7
+   },
+   "Oklahoma": {
+      "startWinter": -2,
+      "startSpring": 0
+   },
+   "Oregon": {
+      "startWinter": 15,
+      "startSpring": -18
+   },
+   "Pennsylvania": {
+      "startWinter": 17,
+      "startSpring": -6
+   },
+   "Rhode Island": {
+      "startWinter": 2,
+      "startSpring": 5
+   },
+   "South Carolina": {
+      "startWinter": 2,
+      "startSpring": -2
+   },
+   "South Dakota": {
+      "startWinter": 9,
+      "startSpring": -9
+   },
+   "Tennesee": {
+      "startWinter": 5,
+      "startSpring": 0
+   },
+   "Texas": {
+      "startWinter": 2,
+      "startSpring": -6
+   },
+   "Utah": {
+      "startWinter": 14,
+      "startSpring": -19
+   },
+   "Virginia": {
+      "startWinter": 11,
+      "startSpring": -6
+   },
+   "Vermont": {
+      "startWinter": 6,
+      "startSpring": -3
+   },
+   "Washington": {
+      "startWinter": 17,
+      "startSpring": -24
+   },
+   "Wisconsin": {
+      "startWinter": 8,
+      "startSpring": -8
+   },
+   "West Virginia": {
+      "startWinter": 10,
+      "startSpring": 1
+   },
+   "Wyoming": {
+      "startWinter": 15,
+      "startSpring": -17
+   }
+}
