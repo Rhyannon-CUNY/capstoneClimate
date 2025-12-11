@@ -43,7 +43,7 @@
                     <option value={year.Year}>{year.Year}</option>
                 {/each}
             </select>     </label>
-      <button type="submit">Submit</button>
+      <button type="submit">Your climate story</button>
     </form>
     <section class="chart-container">
     {#if springData}

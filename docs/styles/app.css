@@ -69,18 +69,33 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 2rem;
   font-family: "Mansalva", sans-serif;
   font-size: 1.5rem;
   background-color: #83b0e1;
   text-align: center;
-  margin-bottom: 3reml;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+select {
+  margin-top: 1rem;
+  width: auto;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  color: #2a9d8f;
+  font-family: "Mansalva", sans-serif;
+  border: 2px solid #2a9d8f;
+  border-radius: 5px;
+  text-align: center;
 }
 
 button {
   margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  padding: 1rem 1rem;
+  font-size: 1.25rem;
   font-family: "Mansalva", sans-serif;
   background-color: #2a9d8f;
   color: white;

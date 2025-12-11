@@ -18,7 +18,7 @@
           <h1>Spring</h1>
           <div class="text-wrapper">
             <p>
-              When you were born, the warmest it got was {dataRecord.maxAtBirth.toFixed(1)}°F. 
+              When you were born, it didn't get warmer than {dataRecord.maxAtBirth.toFixed(1)}°F. 
               Now it's {dataRecord.maxNow.toFixed(1)}°F.
             <br>
               Spring is starting {Math.abs(dataRecord.startSpring)} days {dataRecord.startSpring < 0 ? 'earlier' : 'later'} than it used to. 
