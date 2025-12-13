@@ -5,6 +5,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mansalva&family=Roboto:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 {% endblock styles %}
 
 {% block scripts %}
@@ -12,11 +13,23 @@
 {% endblock scripts %}
 
 {% block content %}
-<section class="container"> 
-	<h1>How has your <br>climate changed?</h1>
-	<h3>Winters are warmer and weather disasters are happening more often. 
-		<br>
-		<br>But by how much?</h3>   
+<nav class="masthead-nav">
+  <div class="nav-container">
+    <div class="nav-left">
+      <a href="/" class="nav-logo">Rhyannon Bartlett-Imadegawa</a>
+    </div>
+  </div>
+</nav>
+
+<section class="container">
+	<header class="article-header">
+	    <h1 class="news-headline">How has your climate changed?</h1>
+	    <div class="article-meta">
+	        <span class="byline">By Rhyannon Bartlett-Imadegawa</span>
+	        <span class="date">Published [Date]</span>
+	    </div>
+	    <h2 class="news-dek">Winters are warmer and weather disasters are happening more often. But by how much?</h2>
+	</header>
 		{% for p in copy.top_text %}
 		<p>{{ p.value }}</p>
 		{% endfor %}

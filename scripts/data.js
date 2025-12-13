@@ -9,6 +9,7 @@ import climate from '../_data/state_temps.json';
 import extremeHeatData from '../_data/extreme_heat_days.json';
 import extremeColdData from '../_data/extreme_cold_days.json';
 import seasonTiming from '../_data/frost.json';
+// import { get } from 'http';
 
 const stepData = {
   1: {
@@ -82,15 +83,23 @@ function getWinter(state, birthYear) {
   /* pull extreme cold days by age and the end of the century*/
   const coldDaysFuture = getColdDaysByAge(state, birthYear, [67, 100], [2099]);
   const milestones = coldDaysFuture?.milestones || [];
+  const freezingAtBirth = getDataForAgeInternal(
+    extremeColdData,
+    'extreme_cold_days',
+    state,
+    birthYear,
+    0
+  );
+
   const freezing67 = milestones.find((m) => m.age === 67)?.days || null;
   const freezing100 = milestones.find((m) => m.age === 100)?.days || null;
-  const freezing2099 = milestones.find((m) => m.year === 2099)?.days || null;
+  const freezing2099 = milestones.find((m) => m.isEndOfCentury)?.days || null;
 
   return {
     minAtBirth: seasonalAverage(stateData.tmin, birthYear, 'winter'),
     minNow: seasonalAverage(stateData.tmin, 2025, 'winter'),
     freezingNow: getCurrentColdDays(state),
-    freezingAtBirth: null,
+    freezingAtBirth: freezingAtBirth,
     freezing67: freezing67,
     freezing100: freezing100,
     freezing2099: freezing2099,
@@ -110,7 +119,7 @@ function getSpring(state, birthYear) {
     maxAtBirth: seasonalAverage(stateData.tmax, birthYear, 'spring'),
     minNow: seasonalAverage(stateData.tmin, 2025, 'spring'),
     maxNow: seasonalAverage(stateData.tmax, 2025, 'spring'),
-    startSpring: timing?.startSpring || null,
+    startSpring: timing?.startSpring ?? null,
   };
 }
 
@@ -120,17 +129,26 @@ function getSummer(state, birthYear) {
   const stateData = climate[state];
   if (!stateData) return null;
   /* pull extreme heat days by age and the end of the century*/
+  const hotAtBirth = getDataForAgeInternal(
+    extremeHeatData,
+    'extreme_heat_days',
+    state,
+    birthYear,
+    0
+  );
   const heatDaysFuture = getHeatDaysByAge(state, birthYear, [67, 100], [2099]);
   const milestones = heatDaysFuture?.milestones || [];
   const hot67 = milestones.find((m) => m.age === 67)?.days || null;
   const hot100 = milestones.find((m) => m.age === 100)?.days || null;
-  const hot2099 = milestones.find((m) => m.year === 2099)?.days || null;
+  const hot2099 = milestones.find((m) => m.isEndOfCentury)?.days || null;
 
   return {
     maxAtBirth: seasonalAverage(stateData.tmax, birthYear, 'summer'),
     maxNow: seasonalAverage(stateData.tmax, 2025, 'summer'),
+    minAtBirth: seasonalAverage(stateData.tmin, birthYear, 'summer'),
+    minNow: seasonalAverage(stateData.tmin, 2025, 'summer'),
     hotNow: getCurrentHeatDays(state),
-    hotAtBirth: null,
+    hotAtBirth: hotAtBirth,
     hot67: hot67,
     hot100: hot100,
     hot2099: hot2099,
@@ -149,7 +167,7 @@ function getFall(state, birthYear) {
     maxAtBirth: seasonalAverage(stateData.tmax, birthYear, 'fall'),
     minNow: seasonalAverage(stateData.tmin, 2025, 'fall'),
     maxNow: seasonalAverage(stateData.tmax, 2025, 'fall'),
-    startWinter: timing?.startWinter || null,
+    startWinter: timing?.startWinter ?? null,
   };
 }
 
@@ -213,8 +231,8 @@ function getExtremeDaysByAge(
   const milestones = [];
 
   for (const age of targetAges) {
-    if (currentAge < age || age === 2099) {
-      // Special handling for year 2099
+    if (currentAge < age) {
+      //person hasn't reach the age yet
       const data = getDataForAge(age);
       milestones.push({
         age: age,
@@ -233,6 +251,7 @@ function getExtremeDaysByAge(
         year: year,
         days: data.days,
         dataYear: data.dataYear,
+        isEndOfCentury: true,
       });
     }
   }
@@ -244,6 +263,19 @@ function getExtremeDaysByAge(
     milestones: milestones,
   };
 }
+
+function getDataForAgeInternal(dataset, dataKey, state, birthYear, age) {
+  const stateData = dataset[state]?.[dataKey];
+  if (!stateData) return null;
+
+  const targetYear = birthYear + age;
+
+  if (targetYear <= 2022) return stateData['2005'];
+  if (targetYear <= 2049) return stateData['2039'];
+  if (targetYear <= 2079) return stateData['2059'];
+  return stateData['2099'];
+}
+
 /**
  * Get current extreme days for comparison
  * @param {string} state - State name

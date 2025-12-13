@@ -13,6 +13,8 @@
     let summerData = null;
     let fallData =null;
     let winterData =null;
+    let freezes = 'no';
+    let hot = 'no';
   
     function handleSubmit() {
         console.log("handling submit", state, birthYear);
@@ -21,13 +23,15 @@
       summerData = personalData.summer; // Extract the summer data
       fallData = personalData.fall; // Extract the fall data
       winterData = personalData.winter; // Extract the fall data
+      freezes = personalData.freezes;
+      hot = personalData.hot;
     }
   </script>
   
   <div>
     <form on:submit|preventDefault={handleSubmit}>
       <label>
-        Where were you born?
+      <h2>Where were you born?</h2>
         <select bind:value={state}>
           <option value="" disabled selected>State</option>
           {#each states as stateOption}
@@ -36,7 +40,7 @@
         </select>
       </label>
       <label>
-        When were you born?
+        <h2>What year?</h2>
             <select bind:value={birthYear}>
                 <option value="" disabled selected>Year</option>
                 {#each years as year}
@@ -50,13 +54,13 @@
       <Spring dataRecord={springData} />
     {/if}
     {#if summerData}
-      <Summer dataRecord={summerData} />
+      <Summer dataRecord={summerData} hot={hot} />
     {/if}
     {#if fallData}
       <Fall dataRecord={fallData} />
     {/if}
     {#if winterData}
-      <Winter dataRecord={winterData} />
+      <Winter dataRecord={winterData} freezes={freezes} />
     {/if}
     </section>
   </div>
