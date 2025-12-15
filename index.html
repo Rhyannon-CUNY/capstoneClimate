@@ -2,9 +2,9 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'styles/app.scss' %}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mansalva&family=Roboto:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Mansalva&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 {% endblock styles %}
 
@@ -16,7 +16,7 @@
 <nav class="masthead-nav">
   <div class="nav-container">
     <div class="nav-left">
-      <a href="/" class="nav-logo">Rhyannon Bartlett-Imadegawa</a>
+      <span class="nav-text">Rhyannon Bartlett-Imadegawa</span>
     </div>
   </div>
 </nav>
@@ -37,7 +37,26 @@
 
 <div id="app"></div>
 
-<section class="container"> 
+<!-- <div class="conclusion-section">
+	<div class="conclusion-content">
+	  <h2>The Seasons Are Changing</h2>
+	  {% for p in copy.conclusion %}
+		<p>{{ p.value }}</p>
+		{% endfor %}
+	  <p>
+		Your experience of the seasons has shifted since you were born. 
+		These changes  a rapidly warming planet and the urgent need for climate action.
+	  </p>
+	  <p>
+		The data you've seen is personal, but the story is universal. And it's worse for some than others.
+		Every community is experiencing the effects of climate change in their own way.
+	  </p>
+	  <a href="#" class="conclusion-cta">Learn More About Climate Change</a>
+	  <p style="font-size: 0.75rem">Methodology: this interactive used data from NOAA, NCEI, the University of Chicago's Climate Impact Lab,</p>
+	</div>
+  </div> -->
+
+<!-- <section class="container"> 
 		{% for p in copy.mid_text1 %}
 	<p>{{ p.value }}</p>
 		{% endfor %}
@@ -47,5 +66,5 @@
 	{% for p in copy.mid_text2 %}
 	<p>{{ p.value}}</p>
 	{% endfor %}
-</section>
+</section> -->
 {% endblock content %}

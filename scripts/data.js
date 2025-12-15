@@ -11,29 +11,6 @@ import extremeColdData from '../_data/extreme_cold_days.json';
 import seasonTiming from '../_data/frost.json';
 // import { get } from 'http';
 
-const stepData = {
-  1: {
-    gif: './assets/Leafs.gif',
-    bgColor: '#b66d0d',
-  },
-  2: {
-    gif: './assets/Snow1.gif',
-    bgColor: '#83b0e1',
-  },
-  3: {
-    gif: './assets/Flowers.gif',
-    bgColor: '#90ffdc',
-  },
-  4: {
-    gif: './assets/Sun.gif',
-    bgColor: '#ffdb57',
-  },
-  5: {
-    gif: 'path/to/gif5.gif',
-    bgColor: 'purple',
-  },
-};
-
 // using d3 for convenience, and storing a selected elements
 const scrollSections = d3.selectAll('#scroll2');
 
@@ -44,9 +21,6 @@ function init() {
     target: document.getElementById('app'),
     props: {},
   });
-  // new Summer({
-  //   target: document.getElementById('summer'),
-  // });
 }
 
 /**
@@ -62,13 +36,26 @@ function init() {
 /* combine the seasonal data into one tidy output */
 
 export function getPersonal(state, birthYear) {
+  const spring = getSpring(state, birthYear);
+  const summer = getSummer(state, birthYear);
+  const fall = getFall(state, birthYear);
+  const winter = getWinter(state, birthYear);
+
   const personalData = {
     birthYear: birthYear,
     state: state,
+    spring: spring,
+    summer: summer,
+    fall: fall,
     winter: getWinter(state, birthYear),
-    spring: getSpring(state, birthYear),
-    summer: getSummer(state, birthYear),
-    fall: getFall(state, birthYear),
+    future: {
+      hot67: summer?.hot67 || 0,
+      hot100: summer?.hot100 || 0,
+      hot2099: summer?.hot2099 || 0,
+      freezing67: winter?.freezing67 || 0,
+      freezing100: winter?.freezing100 || 0,
+      freezing2099: winter?.freezing2099 || 0,
+    },
     ...getFreezeOrHot(state),
   };
 
@@ -103,6 +90,7 @@ function getWinter(state, birthYear) {
     freezing67: freezing67,
     freezing100: freezing100,
     freezing2099: freezing2099,
+    min1925: seasonalAverage(stateData.tmin, 1925, 'winter'),
   };
 }
 
@@ -120,6 +108,7 @@ function getSpring(state, birthYear) {
     minNow: seasonalAverage(stateData.tmin, 2025, 'spring'),
     maxNow: seasonalAverage(stateData.tmax, 2025, 'spring'),
     startSpring: timing?.startSpring ?? null,
+    max1925: seasonalAverage(stateData.tmax, 1925, 'spring'),
   };
 }
 
@@ -152,6 +141,7 @@ function getSummer(state, birthYear) {
     hot67: hot67,
     hot100: hot100,
     hot2099: hot2099,
+    max1925: seasonalAverage(stateData.tmax, 1925, 'summer'),
   };
 }
 /* get attributes for fall by state and birthyear */
@@ -168,6 +158,7 @@ function getFall(state, birthYear) {
     minNow: seasonalAverage(stateData.tmin, 2025, 'fall'),
     maxNow: seasonalAverage(stateData.tmax, 2025, 'fall'),
     startWinter: timing?.startWinter ?? null,
+    max1925: seasonalAverage(stateData.tmax, 1925, 'fall'),
   };
 }
 
