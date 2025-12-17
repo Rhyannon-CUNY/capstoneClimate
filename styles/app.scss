@@ -363,7 +363,7 @@ button:disabled:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/assets/spring.gif') no-repeat center center;
+  background: static-url('/assets/spring.gif') no-repeat center center;
   background-size: cover;
   z-index: 2;
   display: flex;
@@ -405,7 +405,7 @@ button:disabled:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/assets/summer.gif') no-repeat center center;
+  background: static-url('/assets/summer.gif') no-repeat center center;
   background-size: cover;
   z-index: 2;
   display: flex;
@@ -448,7 +448,7 @@ button:disabled:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/assets/fall2.gif') no-repeat center center;
+  background: static-url('/assets/fall2.gif') no-repeat center center;
   background-size: cover;
   z-index: 2;
   display: flex;
@@ -491,7 +491,7 @@ button:disabled:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/assets/winter2.gif') no-repeat center center;
+  background: static-url('/assets/winter2.gif') no-repeat center center;
   background-size: cover;
   z-index: 2;
   display: flex;
