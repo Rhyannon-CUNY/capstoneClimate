@@ -1,16 +1,14 @@
 slug: baker-example-page-template
 
-site_name: Baker Examples
+site_name: How has your climate changed
 locale: en_US
 
-headline: This is not a headline. Lorem ipsum dolor sit amet consectetur adipisicing
+headline: How Has Your Climate Changed?
 
 [byline]
-name: This is not a name
-url: https://www.latimes.com/people/nobody
+name: Rhyannon Bartlett-Imadegawa
+url: https://rhyannonbartlettimadegawa.com/
 
-name: This is not a name
-url: https://www.latimes.com/people/nobody
 []
 
 pub_date: 2099-12-31 23:58:00
@@ -19,7 +17,7 @@ update_date:
 seo_headline: How has your climate changed?
 seo_description: An interactive website to show your home state's climate change
 
-social_headline: This is not a social headline
-social_description: This is not a social description
+social_headline: How has your climate changed?
+social_description: Find out how your home state has been impacted by climate change
 
 social_image: assets/images/ClimateChangeThumbnail.jpg

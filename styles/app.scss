@@ -546,6 +546,10 @@ button:disabled:hover {
 
 .future-gif-background h1 {
   color: #457b9d;
+  font-size: 6rem;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+  margin-top: -5rem;
 }
 
 .future-gif-background p {
@@ -687,5 +691,17 @@ button:disabled:hover {
   .text-wrapper {
     max-width: 90%;
     padding: 1.5rem;
+  }
+
+  .fall-gif-background h1,
+  .spring-gif-background h1,
+  .summer-gif-background h1,
+  .winter-gif-background h1,
+  .future-gif-background h1 {
+    color: #457b9d;
+    font-size: 6rem;
+    margin-bottom: 1.5rem;
+    line-height: 1;
+    margin-top: -5rem;
   }
 }
