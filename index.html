@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'styles/app.scss' %}">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Mansalva&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;500;700&family=Mansalva&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 {% endblock styles %}
 
@@ -24,14 +24,13 @@
 <section class="container">
 	<header class="article-header">
 	    <h1 class="news-headline">How has your climate changed?</h1>
+		<h2 class="news-dek">Winters are warmer, summers are longer and disasters are happening more often. Here's what you can expect.</h2>
 	    <div class="article-meta">
-	        <span class="byline">By Rhyannon Bartlett-Imadegawa</span>
 	        <span class="date">Published [Date]</span>
 	    </div>
-	    <h2 class="news-dek">Winters are warmer and weather disasters are happening more often. But by how much?</h2>
 	</header>
 		{% for p in copy.top_text %}
-		<p>{{ p.value }}</p>
+		<p{% if loop.first %} class="drop-cap"{% endif %}>{{ p.value }}</p>
 		{% endfor %}
 </section>
 

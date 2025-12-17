@@ -76,28 +76,6 @@
           </p>
         {/if}
       </div>
-      <div class="footnote-section">
-        <h3>Data Sources</h3>
-        <p>
-          This analysis is based on climate projections and historical data from
-          the following sources:
-          </p>
-          <p>
-          NOAA National Centers for Environmental Information - Climate
-          data and temperature records
-          <br>NASA Earth Observatory - Seasonal timing and frost data
-          <br>University of Chicago Climate Impact Lab - Extreme heat and cold
-          day projections
-        </p>
-        <p style="margin-top: 1.5rem; font-style: italic;">
-          Projections represent mid-range climate scenarios and actual outcomes
-          may vary. 
-          <br>The 1925 average temperature is based on a 30-year average 
-          from 1895-1925. 
-          <br>
-          Data last updated: December 2025.
-        </p>
-      </div>
     </div>
   </div>
 </div>

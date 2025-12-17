@@ -4,6 +4,7 @@
   import Fall from './Fall.svelte';
   import Winter from './Winter.svelte';
   import Future from './Future.svelte';
+  import Footnote from './Footnote.svelte';
   import { getPersonal } from '../data.js';
   import { states } from './states.js';
   import { years } from './years.js';
@@ -17,6 +18,9 @@
   let futureData = null;
   let freezes = 'no';
   let hot = 'no';
+
+  // Form validation - disable submit button until both fields are selected
+  $: isFormValid = state !== '' && birthYear !== '';
 
   function handleSubmit() {
     console.log('handling submit', state, birthYear);
@@ -59,7 +63,7 @@
         {/each}
       </select>
     </label>
-    <button type="submit">Your climate story</button>
+    <button type="submit" disabled={!isFormValid}>Your climate story</button>
   </form>
   <section class="chart-container">
     {#if springData}
@@ -76,6 +80,9 @@
     {/if}
     {#if futureData}
       <Future dataRecord={futureData} {hot} {freezes} />
+    {/if}
+    {#if futureData}
+      <Footnote />
     {/if}
   </section>
 </div>

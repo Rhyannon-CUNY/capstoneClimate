@@ -576,19 +576,4 @@ function getFreezeOrHot(state) {
 
   return { freezes, hot };
 }
-
-// Attach listener after DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('show').addEventListener('click', () => {
-    const year = parseInt(document.getElementById('birth-year').value);
-    const state = document.getElementById('state').value;
-
-    if (!year || !state) {
-      console.warn('Select both a state and a birth year');
-      return;
-    }
-
-    getPersonal(state, year);
-  });
-});
 init();

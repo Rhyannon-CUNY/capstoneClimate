@@ -34,24 +34,19 @@
         >{dataRecord.avgAtBirth.toFixed(1)}°F</span
       >
       the year you were born.
-      <br />
-      These days it's
+    </p>
+    <p>These days it's
       <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.
-      </p>
-    {#if Math.abs(dataRecord.avgAtBirth - dataRecord.avgNow) < 3}
-      <p>
-        But 100 years ago, the average temperature was <span class="data-value"
-          >{dataRecord.avg1925.toFixed(1)}°F</span
-        >.
-      </p>
+        That might not sound like much, but 100 years ago, the average temperature was <span class="data-value"
+          >{dataRecord.avg1925.toFixed(1)}°F</span>
+    </p>
       {#if dataRecord.alternativeState && dataRecord.alternativeAvgAtBirth !== null && dataRecord.alternativeAvgNow !== null}
         <p>
-          But somewhere like <span class="data-value">{dataRecord.alternativeState}</span> has experienced more change:
+          Somewhere like <span class="data-value">{dataRecord.alternativeState}</span> has experienced more change:
           from <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span>
           to <span class="data-value">{dataRecord.alternativeAvgNow.toFixed(1)}°F</span> since you were born.
         </p>
       {/if}
-    {/if}
   </div>
 </div>
 </div>
