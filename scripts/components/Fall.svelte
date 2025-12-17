@@ -1,11 +1,14 @@
 <script>
   export let dataRecord = {
-    maxAtBirth: 0,
-    maxNow: 0,
+    avgAtBirth: 0,
+    avgNow: 0,
     minAtBirth: 0,
     minNow: 0,
     startWinter: 0,
-    max1925: 0,
+    avg1925: 0,
+    alternativeState: null,
+    alternativeAvgAtBirth: null,
+    alternativeAvgNow: null,
   };
   console.log('Fall dataRecord:', dataRecord);
 </script>
@@ -24,23 +27,31 @@
                 ? 'earlier'
                 : 'later'}</span
             >
-            than it used to when you were born.
+            than it used to. It's warmer for longer.
           </p>
         {/if}
         <p>
-          Back then it didn't get warmer than <span class="data-value"
-            >{dataRecord.maxAtBirth.toFixed(1)}°F</span
-          >.
+          The average temperature was <span class="data-value"
+            >{dataRecord.avgAtBirth.toFixed(1)}°F</span
+          >
+          when you were born.
           <br />
           Now it's
-          <span class="data-value">{dataRecord.maxNow.toFixed(1)}°F</span>.
-        </p>
-        {#if Math.abs(dataRecord.maxAtBirth - dataRecord.maxNow) < 3}
+          <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.
+          </p>
+        {#if Math.abs(dataRecord.avgAtBirth - dataRecord.avgNow) < 3}
           <p>
-            In your grandparents' time, the warmest temperature in fall was <span
-              class="data-value">{dataRecord.max1925.toFixed(1)}°F</span
+            But 100 years ago, the average was <span
+              class="data-value">{dataRecord.avg1925.toFixed(1)}°F</span
             >.
           </p>
+          {#if dataRecord.alternativeState && dataRecord.alternativeAvgAtBirth !== null && dataRecord.alternativeAvgNow !== null}
+            <p>
+              Some states have changed more. In <span class="data-value">{dataRecord.alternativeState}</span> fall temperatures have risen
+              from <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span>
+              to <span class="data-value">{dataRecord.alternativeAvgNow.toFixed(1)}°F</span>.
+            </p>
+          {/if}
         {/if}
       </div>
     </div>

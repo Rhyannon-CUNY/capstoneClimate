@@ -9,6 +9,7 @@ import climate from '../_data/state_temps.json';
 import extremeHeatData from '../_data/extreme_heat_days.json';
 import extremeColdData from '../_data/extreme_cold_days.json';
 import seasonTiming from '../_data/frost.json';
+import disasterData from '../_data/disaster_freq.json';
 // import { get } from 'http';
 
 // using d3 for convenience, and storing a selected elements
@@ -77,20 +78,32 @@ function getWinter(state, birthYear) {
     birthYear,
     0
   );
+  const minAtBirth = seasonalAverage(stateData.tmin, birthYear, 'winter');
+  const minNow = seasonalAverage(stateData.tmin, 2025, 'winter');
+  const alternativeStateData = getAlternativeStateDataWinter(
+    'winter',
+    birthYear,
+    state,
+    minAtBirth,
+    minNow
+  );
 
   const freezing67 = milestones.find((m) => m.age === 67)?.days || null;
   const freezing100 = milestones.find((m) => m.age === 100)?.days || null;
   const freezing2099 = milestones.find((m) => m.isEndOfCentury)?.days || null;
 
   return {
-    minAtBirth: seasonalAverage(stateData.tmin, birthYear, 'winter'),
-    minNow: seasonalAverage(stateData.tmin, 2025, 'winter'),
+    minAtBirth: minAtBirth,
+    minNow: minNow,
     freezingNow: getCurrentColdDays(state),
     freezingAtBirth: freezingAtBirth,
     freezing67: freezing67,
     freezing100: freezing100,
     freezing2099: freezing2099,
     min1925: seasonalAverage(stateData.tmin, 1925, 'winter'),
+    alternativeState: alternativeStateData?.state || null,
+    alternativeMinAtBirth: alternativeStateData?.minAtBirth || null,
+    alternativeMinNow: alternativeStateData?.minNow || null,
   };
 }
 
@@ -101,14 +114,28 @@ function getSpring(state, birthYear) {
   if (!stateData) return null;
 
   const timing = getSeasonTiming(state);
+  // Use tavg for temperature calculations
+  const tempData = stateData.tavg;
+  const avgAtBirth = seasonalAverage(tempData, birthYear, 'spring');
+  const avgNow = seasonalAverage(tempData, 2025, 'spring');
+  const alternativeStateData = getAlternativeStateData(
+    'spring',
+    birthYear,
+    state,
+    avgAtBirth,
+    avgNow
+  );
 
   return {
     minAtBirth: seasonalAverage(stateData.tmin, birthYear, 'spring'),
-    maxAtBirth: seasonalAverage(stateData.tmax, birthYear, 'spring'),
+    avgAtBirth: avgAtBirth,
     minNow: seasonalAverage(stateData.tmin, 2025, 'spring'),
-    maxNow: seasonalAverage(stateData.tmax, 2025, 'spring'),
+    avgNow: avgNow,
     startSpring: timing?.startSpring ?? null,
-    max1925: seasonalAverage(stateData.tmax, 1925, 'spring'),
+    avg1925: seasonalAverage(tempData, 1925, 'spring'),
+    alternativeState: alternativeStateData?.state || null,
+    alternativeAvgAtBirth: alternativeStateData?.avgAtBirth || null,
+    alternativeAvgNow: alternativeStateData?.avgNow || null,
   };
 }
 
@@ -130,10 +157,21 @@ function getSummer(state, birthYear) {
   const hot67 = milestones.find((m) => m.age === 67)?.days || null;
   const hot100 = milestones.find((m) => m.age === 100)?.days || null;
   const hot2099 = milestones.find((m) => m.isEndOfCentury)?.days || null;
+  // Use tavg for temperature calculations
+  const tempData = stateData.tavg;
+  const avgAtBirth = seasonalAverage(tempData, birthYear, 'summer');
+  const avgNow = seasonalAverage(tempData, 2025, 'summer');
+  const alternativeStateData = getAlternativeStateData(
+    'summer',
+    birthYear,
+    state,
+    avgAtBirth,
+    avgNow
+  );
 
   return {
-    maxAtBirth: seasonalAverage(stateData.tmax, birthYear, 'summer'),
-    maxNow: seasonalAverage(stateData.tmax, 2025, 'summer'),
+    avgAtBirth: avgAtBirth,
+    avgNow: avgNow,
     minAtBirth: seasonalAverage(stateData.tmin, birthYear, 'summer'),
     minNow: seasonalAverage(stateData.tmin, 2025, 'summer'),
     hotNow: getCurrentHeatDays(state),
@@ -141,7 +179,10 @@ function getSummer(state, birthYear) {
     hot67: hot67,
     hot100: hot100,
     hot2099: hot2099,
-    max1925: seasonalAverage(stateData.tmax, 1925, 'summer'),
+    avg1925: seasonalAverage(tempData, 1925, 'summer'),
+    alternativeState: alternativeStateData?.state || null,
+    alternativeAvgAtBirth: alternativeStateData?.avgAtBirth || null,
+    alternativeAvgNow: alternativeStateData?.avgNow || null,
   };
 }
 /* get attributes for fall by state and birthyear */
@@ -151,14 +192,28 @@ function getFall(state, birthYear) {
   if (!stateData) return null;
 
   const timing = getSeasonTiming(state);
+  // Use tavg for temperature calculations
+  const tempData = stateData.tavg;
+  const avgAtBirth = seasonalAverage(tempData, birthYear, 'fall');
+  const avgNow = seasonalAverage(tempData, 2025, 'fall');
+  const alternativeStateData = getAlternativeStateData(
+    'fall',
+    birthYear,
+    state,
+    avgAtBirth,
+    avgNow
+  );
 
   return {
     minAtBirth: seasonalAverage(stateData.tmin, birthYear, 'fall'),
-    maxAtBirth: seasonalAverage(stateData.tmax, birthYear, 'fall'),
+    avgAtBirth: avgAtBirth,
     minNow: seasonalAverage(stateData.tmin, 2025, 'fall'),
-    maxNow: seasonalAverage(stateData.tmax, 2025, 'fall'),
+    avgNow: avgNow,
     startWinter: timing?.startWinter ?? null,
-    max1925: seasonalAverage(stateData.tmax, 1925, 'fall'),
+    avg1925: seasonalAverage(tempData, 1925, 'fall'),
+    alternativeState: alternativeStateData?.state || null,
+    alternativeAvgAtBirth: alternativeStateData?.avgAtBirth || null,
+    alternativeAvgNow: alternativeStateData?.avgNow || null,
   };
 }
 
@@ -184,6 +239,125 @@ function seasonalAverage(records, year, season) {
   if (!seasonValues.length) return null;
 
   return seasonValues.reduce((a, b) => a + b, 0) / seasonValues.length;
+}
+
+/* Get alternative state data for comparison */
+function getAlternativeStateData(
+  season,
+  birthYear,
+  currentState,
+  currentTempAtBirth,
+  currentTempNow
+) {
+  // Find the state with the greatest temperature change for this season
+  // that has a significantly greater change than the current state
+
+  let bestAlternativeState = null;
+  let bestChange = 0;
+  const minSignificantChange = 5; // Minimum degree difference to be considered significant
+
+  // Calculate the current state's temperature change
+  const currentChange = Math.abs(currentTempNow - currentTempAtBirth);
+
+  // Analyze all states to find the best alternative
+  Object.keys(climate).forEach((state) => {
+    // Skip the current state and states without data
+    if (state === currentState || !climate[state]) return;
+
+    const stateData = climate[state];
+    // Use tavg for temperature calculations
+    const tempData = stateData.tavg;
+    const tempAtBirth = seasonalAverage(tempData, birthYear, season);
+    const tempNow = seasonalAverage(tempData, 2025, season);
+
+    if (tempAtBirth !== null && tempNow !== null) {
+      const change = Math.abs(tempNow - tempAtBirth);
+
+      // Look for states with significantly greater changes
+      if (
+        change > bestChange &&
+        change > currentChange + minSignificantChange
+      ) {
+        bestChange = change;
+        bestAlternativeState = state;
+      }
+    }
+  });
+
+  // If we found a suitable alternative state, return its data
+  if (bestAlternativeState && climate[bestAlternativeState]) {
+    const stateData = climate[bestAlternativeState];
+    // Use tavg for temperature calculations
+    const tempData = stateData.tavg;
+    return {
+      state: bestAlternativeState,
+      avgAtBirth: seasonalAverage(tempData, birthYear, season),
+      avgNow: seasonalAverage(tempData, 2025, season),
+      minAtBirth: seasonalAverage(stateData.tmin, birthYear, season),
+      minNow: seasonalAverage(stateData.tmin, 2025, season),
+      temperatureChange: bestChange,
+    };
+  }
+
+  // If no suitable alternative found, return null
+  return null;
+}
+
+/* Get alternative state data for winter comparison (uses min temperatures) */
+function getAlternativeStateDataWinter(
+  season,
+  birthYear,
+  currentState,
+  currentMinAtBirth,
+  currentMinNow
+) {
+  // Find the state with the greatest temperature change for winter
+  // that has a significantly greater change than the current state
+
+  let bestAlternativeState = null;
+  let bestChange = 0;
+  const minSignificantChange = 5; // Minimum degree difference to be considered significant
+
+  // Calculate the current state's temperature change
+  const currentChange = Math.abs(currentMinNow - currentMinAtBirth);
+
+  // Analyze all states to find the best alternative
+  Object.keys(climate).forEach((state) => {
+    // Skip the current state and states without data
+    if (state === currentState || !climate[state] || !climate[state].tmin)
+      return;
+
+    const stateData = climate[state];
+    const minAtBirth = seasonalAverage(stateData.tmin, birthYear, season);
+    const minNow = seasonalAverage(stateData.tmin, 2025, season);
+
+    if (minAtBirth !== null && minNow !== null) {
+      const change = Math.abs(minNow - minAtBirth);
+
+      // Look for states with significantly greater changes
+      if (
+        change > bestChange &&
+        change > currentChange + minSignificantChange
+      ) {
+        bestChange = change;
+        bestAlternativeState = state;
+      }
+    }
+  });
+
+  // If we found a suitable alternative state, return its data
+  if (bestAlternativeState && climate[bestAlternativeState]) {
+    const stateData = climate[bestAlternativeState];
+    return {
+      state: bestAlternativeState,
+      minAtBirth: seasonalAverage(stateData.tmin, birthYear, season),
+      minNow: seasonalAverage(stateData.tmin, 2025, season),
+      temperatureChange: bestChange,
+    };
+  }
+
+  // If no suitable alternative found, return null
+  return null;
 }
 
 /**
