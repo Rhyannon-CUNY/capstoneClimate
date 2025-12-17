@@ -47,7 +47,7 @@
           </p>
           {#if dataRecord.alternativeState && dataRecord.alternativeAvgAtBirth !== null && dataRecord.alternativeAvgNow !== null}
             <p>
-              Some states have changed more. In <span class="data-value">{dataRecord.alternativeState}</span> fall temperatures have risen
+              Some states have changed more since you were born. In <span class="data-value">{dataRecord.alternativeState}</span> fall temperatures have risen
               from <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span>
               to <span class="data-value">{dataRecord.alternativeAvgNow.toFixed(1)}°F</span>.
             </p>

@@ -48,7 +48,7 @@
         <p>
           But somewhere like <span class="data-value">{dataRecord.alternativeState}</span> has experienced more change:
           from <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span>
-          to <span class="data-value">{dataRecord.alternativeAvgNow.toFixed(1)}°F</span>.
+          to <span class="data-value">{dataRecord.alternativeAvgNow.toFixed(1)}°F</span> since you were born.
         </p>
       {/if}
     {/if}

@@ -83,13 +83,15 @@
           the following sources:
           <br />NOAA National Centers for Environmental Information - Climate
           data and temperature records
-          <br />EPA Climate Change Indicators - 
+          <br />NASA Earth Observatory - Seasonal timing and frost data
           <br />University of Chicago Climate Impact Lab - Extreme heat and cold
           day projections
         </p>
         <p style="margin-top: 1.5rem; font-style: italic;">
           Projections represent mid-range climate scenarios and actual outcomes
-          may vary. Data last updated: December 2025.
+          may vary. The 1925 average temperature is based on a 30-year average 
+          from 1895-1925. 
+          Data last updated: December 2025.
         </p>
       </div>
     </div>

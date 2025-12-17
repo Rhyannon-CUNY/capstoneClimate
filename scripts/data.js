@@ -100,7 +100,7 @@ function getWinter(state, birthYear) {
     freezing67: freezing67,
     freezing100: freezing100,
     freezing2099: freezing2099,
-    min1925: seasonalAverage(stateData.tmin, 1925, 'winter'),
+    min1925: seasonalMultiYearAverage(stateData.tmin, 1895, 1925, 'winter'),
     alternativeState: alternativeStateData?.state || null,
     alternativeMinAtBirth: alternativeStateData?.minAtBirth || null,
     alternativeMinNow: alternativeStateData?.minNow || null,
@@ -132,7 +132,7 @@ function getSpring(state, birthYear) {
     minNow: seasonalAverage(stateData.tmin, 2025, 'spring'),
     avgNow: avgNow,
     startSpring: timing?.startSpring ?? null,
-    avg1925: seasonalAverage(tempData, 1925, 'spring'),
+    avg1925: seasonalMultiYearAverage(tempData, 1895, 1925, 'spring'),
     alternativeState: alternativeStateData?.state || null,
     alternativeAvgAtBirth: alternativeStateData?.avgAtBirth || null,
     alternativeAvgNow: alternativeStateData?.avgNow || null,
@@ -179,7 +179,7 @@ function getSummer(state, birthYear) {
     hot67: hot67,
     hot100: hot100,
     hot2099: hot2099,
-    avg1925: seasonalAverage(tempData, 1925, 'summer'),
+    avg1925: seasonalMultiYearAverage(tempData, 1895, 1925, 'summer'),
     alternativeState: alternativeStateData?.state || null,
     alternativeAvgAtBirth: alternativeStateData?.avgAtBirth || null,
     alternativeAvgNow: alternativeStateData?.avgNow || null,
@@ -210,7 +210,7 @@ function getFall(state, birthYear) {
     minNow: seasonalAverage(stateData.tmin, 2025, 'fall'),
     avgNow: avgNow,
     startWinter: timing?.startWinter ?? null,
-    avg1925: seasonalAverage(tempData, 1925, 'fall'),
+    avg1925: seasonalMultiYearAverage(tempData, 1895, 1925, 'fall'),
     alternativeState: alternativeStateData?.state || null,
     alternativeAvgAtBirth: alternativeStateData?.avgAtBirth || null,
     alternativeAvgNow: alternativeStateData?.avgNow || null,
@@ -235,6 +235,33 @@ function seasonalAverage(records, year, season) {
       return r.year === year && seasonMonths[season].includes(r.month);
     })
     .map((r) => r.value);
+
+  if (!seasonValues.length) return null;
+
+  return seasonValues.reduce((a, b) => a + b, 0) / seasonValues.length;
+}
+
+/* Calculate seasonal average temperature across multiple years (1895-1925 baseline)
+ */
+function seasonalMultiYearAverage(records, startYear, endYear, season) {
+  const seasonMonths = {
+    winter: [12, 1, 2],
+    spring: [3, 4, 5],
+    summer: [6, 7, 8],
+    fall: [9, 10, 11],
+  };
+
+  const seasonValues = [];
+
+  // Collect data for all years in the range
+  for (let year = startYear; year <= endYear; year++) {
+    const yearRecords = records.filter((r) => {
+      if (r.month === 12 && season === 'winter') return r.year === year - 1;
+      return r.year === year && seasonMonths[season].includes(r.month);
+    });
+
+    seasonValues.push(...yearRecords.map((r) => r.value));
+  }
 
   if (!seasonValues.length) return null;
 

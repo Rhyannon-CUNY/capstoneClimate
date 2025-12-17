@@ -33,7 +33,7 @@
           </p>
           {#if dataRecord.alternativeState && dataRecord.alternativeMinAtBirth !== null && dataRecord.alternativeMinNow !== null}
             <p>
-              In <span class="data-value">{dataRecord.alternativeState}</span> though, winters are changing more starkly.
+              In <span class="data-value">{dataRecord.alternativeState}</span> though, winters have changed more starkly since you were born..
               The coldest temperatures went from <span class="data-value">{dataRecord.alternativeMinAtBirth.toFixed(1)}°F</span>
               to <span class="data-value">{dataRecord.alternativeMinNow.toFixed(1)}°F</span>.
             </p>
