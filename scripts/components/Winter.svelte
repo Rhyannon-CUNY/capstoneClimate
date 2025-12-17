@@ -24,7 +24,7 @@
         <p>
           Winters used to get as cold as <span class="data-value"
             >{dataRecord.minAtBirth.toFixed(1)}°F</span
-          >. Now it reaches
+          >. These days it reaches
           <span class="data-value">{dataRecord.minNow.toFixed(1)}°F.</span>
         <br>
             But in 1925, the minimum temperature was <span class="data-value"

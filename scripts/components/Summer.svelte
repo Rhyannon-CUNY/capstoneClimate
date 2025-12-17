@@ -31,7 +31,7 @@
           </span>
           when you were born.
           <br />
-          Now it's
+          This year it's
           <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.
           </p>
         {#if Math.abs(dataRecord.avgAtBirth - dataRecord.avgNow) < 3}
