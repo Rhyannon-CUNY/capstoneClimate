@@ -25,29 +25,6 @@
     <div class="summer-gif-background">
       <h1>Summer</h1>
       <div class="text-wrapper">
-        <p>
-          The average temperature was <span class="data-value"
-            >{dataRecord.avgAtBirth.toFixed(1)}°F
-          </span>
-          when you were born.
-          <br />
-          This year it's
-          <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.
-          </p>
-        {#if Math.abs(dataRecord.avgAtBirth - dataRecord.avgNow) < 3}
-          <p>
-            But 100 years ago, the average temperature was <span
-              class="data-value">{dataRecord.avg1925.toFixed(1)}°F</span
-            >.
-          </p>
-          {#if dataRecord.alternativeState && dataRecord.alternativeAvgAtBirth !== null && dataRecord.alternativeAvgNow !== null}
-            <p>
-              In somewhere like <span class="data-value">{dataRecord.alternativeState}</span>, the change is more noticeable:
-              from <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span>
-              to <span class="data-value">{dataRecord.alternativeAvgNow.toFixed(1)}°F</span> since you were born.
-            </p>
-          {/if}
-        {/if}
         {#if hot === 'yes'}
           {#if dataRecord.hotAtBirth !== null && dataRecord.hotAtBirth > 0}
             <p>
@@ -58,10 +35,29 @@
           {/if}
           {#if dataRecord.hotNow !== null && dataRecord.hotAtBirth > 0}
             <p>
-              Now there {dataRecord.hotNow === 1 ? 'is' : 'are'} <span class="data-value">{dataRecord.hotNow} day{dataRecord.hotNow !== 1 ? 's' : ''}</span> that hot.
+              Now <span class="data-value">{dataRecord.hotNow} day{dataRecord.hotNow !== 1 ? 's' : ''}</span> {dataRecord.hotNow === 1 ? 'is' : 'are'}  that hot.
             </p>
           {/if}
         {/if}
+        <p>
+          The average temperature was <span class="data-value"
+            >{dataRecord.avgAtBirth.toFixed(1)}°F
+          </span> when you were born.
+        </p>
+        {#if dataRecord.avgNow - dataRecord.avgAtBirth >= 3}
+          <p>This year it's <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.</p>
+        {/if}
+        <p>One hundred years ago, the average temperature was <span
+            class="data-value">{dataRecord.avg1925.toFixed(1)}°F</span>.
+        </p>
+        {#if dataRecord.alternativeState && dataRecord.alternativeAvgAtBirth !== null && dataRecord.alternativeAvgNow !== null}
+          <p>
+            <span class="data-value">{dataRecord.alternativeState}</span> has had more noticeable change since you were born:
+            from <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span>
+            to <span class="data-value">{dataRecord.alternativeAvgNow.toFixed(1)}°F</span>.
+          </p>
+        {/if}
+        
       </div>
     </div>
   </div>

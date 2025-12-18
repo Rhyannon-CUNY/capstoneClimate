@@ -12,7 +12,7 @@ University of Chicago Climate Impact Lab for Extreme heat and cold
   </p>
   <p>
     Projections represent mid-range climate scenarios and actual outcomes
-    may vary. The 1925 average temperature is based on a 30-year average
+    may vary. The 1925 average temperature is based on a 30-year seasonal average
     from 1895-1925.
   </p>
 </div>

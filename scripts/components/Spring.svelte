@@ -35,10 +35,13 @@
       >
       the year you were born.
     </p>
-    <p>These days it's
-      <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.
-        That might not sound like much, but 100 years ago, the average temperature was <span class="data-value"
-          >{dataRecord.avg1925.toFixed(1)}°F</span>
+    {#if dataRecord.avgNow - dataRecord.avgAtBirth >= 3}
+      <p>These days it's
+        <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.
+      </p>
+    {/if}
+    <p>In 1925, 100 years ago, the average temperature was <span class="data-value"
+        >{dataRecord.avg1925.toFixed(1)}°F</span>
     </p>
       {#if dataRecord.alternativeState && dataRecord.alternativeAvgAtBirth !== null && dataRecord.alternativeAvgNow !== null}
         <p>

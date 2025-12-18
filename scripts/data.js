@@ -277,19 +277,15 @@ function getAlternativeStateData(
   currentTempNow
 ) {
   // Find the state with the greatest temperature change for this season
-  // that has a significantly greater change than the current state
+  // Only show alternative if a different state has greater change than current state
 
-  let bestAlternativeState = null;
-  let bestChange = 0;
-  const minSignificantChange = 5; // Minimum degree difference to be considered significant
+  let greatestChangeState = null;
+  let greatestChange = 0;
+  let currentStateChange = Math.abs(currentTempNow - currentTempAtBirth);
 
-  // Calculate the current state's temperature change
-  const currentChange = Math.abs(currentTempNow - currentTempAtBirth);
-
-  // Analyze all states to find the best alternative
+  // First pass: Find state with greatest change (including current state)
   Object.keys(climate).forEach((state) => {
-    // Skip the current state and states without data
-    if (state === currentState || !climate[state]) return;
+    if (!climate[state]) return;
 
     const stateData = climate[state];
     // Use tavg for temperature calculations
@@ -299,34 +295,33 @@ function getAlternativeStateData(
 
     if (tempAtBirth !== null && tempNow !== null) {
       const change = Math.abs(tempNow - tempAtBirth);
-
-      // Look for states with significantly greater changes
-      if (
-        change > bestChange &&
-        change > currentChange + minSignificantChange
-      ) {
-        bestChange = change;
-        bestAlternativeState = state;
+      if (change > greatestChange) {
+        greatestChange = change;
+        greatestChangeState = state;
       }
     }
   });
 
-  // If we found a suitable alternative state, return its data
-  if (bestAlternativeState && climate[bestAlternativeState]) {
-    const stateData = climate[bestAlternativeState];
+  // Only return alternative if a DIFFERENT state has greater change than current state
+  if (
+    greatestChangeState &&
+    greatestChangeState !== currentState &&
+    greatestChange > currentStateChange
+  ) {
+    const stateData = climate[greatestChangeState];
     // Use tavg for temperature calculations
     const tempData = stateData.tavg;
     return {
-      state: bestAlternativeState,
+      state: greatestChangeState,
       avgAtBirth: seasonalAverage(tempData, birthYear, season),
       avgNow: seasonalAverage(tempData, 2025, season),
       minAtBirth: seasonalAverage(stateData.tmin, birthYear, season),
       minNow: seasonalAverage(stateData.tmin, 2025, season),
-      temperatureChange: bestChange,
+      temperatureChange: greatestChange,
     };
   }
 
-  // If no suitable alternative found, return null
+  // If current state has greatest change, or no greater change found, return null
   return null;
 }
 
@@ -338,52 +333,48 @@ function getAlternativeStateDataWinter(
   currentMinAtBirth,
   currentMinNow
 ) {
-  // Find the state with the greatest temperature change for winter
-  // that has a significantly greater change than the current state
+  // Find the state with the greatest WARMING change for winter
+  // Only show alternative if a different state has greater warming than current state
 
-  let bestAlternativeState = null;
-  let bestChange = 0;
-  const minSignificantChange = 5; // Minimum degree difference to be considered significant
+  let greatestWarmingState = null;
+  let greatestWarmingChange = 0;
+  let currentStateWarmingChange = currentMinNow - currentMinAtBirth;
 
-  // Calculate the current state's temperature change
-  const currentChange = Math.abs(currentMinNow - currentMinAtBirth);
-
-  // Analyze all states to find the best alternative
+  // First pass: Find state with greatest warming change (including current state)
+  // Only consider states that actually warmed (minNow > minAtBirth)
   Object.keys(climate).forEach((state) => {
-    // Skip the current state and states without data
-    if (state === currentState || !climate[state] || !climate[state].tmin)
-      return;
+    if (!climate[state] || !climate[state].tmin) return;
 
     const stateData = climate[state];
     const minAtBirth = seasonalAverage(stateData.tmin, birthYear, season);
     const minNow = seasonalAverage(stateData.tmin, 2025, season);
 
     if (minAtBirth !== null && minNow !== null) {
-      const change = Math.abs(minNow - minAtBirth);
-
-      // Look for states with significantly greater changes
-      if (
-        change > bestChange &&
-        change > currentChange + minSignificantChange
-      ) {
-        bestChange = change;
-        bestAlternativeState = state;
+      const warmingChange = minNow - minAtBirth; // Positive = warming, Negative = cooling
+      if (warmingChange > greatestWarmingChange) {
+        greatestWarmingChange = warmingChange;
+        greatestWarmingState = state;
       }
     }
   });
 
-  // If we found a suitable alternative state, return its data
-  if (bestAlternativeState && climate[bestAlternativeState]) {
-    const stateData = climate[bestAlternativeState];
+  // Only return alternative if a DIFFERENT state has greater warming than current state
+  // Focus on warming trends (greatestWarmingChange > 0)
+  if (
+    greatestWarmingState &&
+    greatestWarmingState !== currentState &&
+    greatestWarmingChange > currentStateWarmingChange
+  ) {
+    const stateData = climate[greatestWarmingState];
     return {
-      state: bestAlternativeState,
+      state: greatestWarmingState,
       minAtBirth: seasonalAverage(stateData.tmin, birthYear, season),
       minNow: seasonalAverage(stateData.tmin, 2025, season),
-      temperatureChange: bestChange,
+      temperatureChange: greatestWarmingChange,
     };
   }
 
-  // If no suitable alternative found, return null
+  // If current state has greatest warming, or no greater warming found, return null
   return null;
 }
 
