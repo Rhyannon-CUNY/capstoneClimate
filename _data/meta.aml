@@ -3,15 +3,14 @@ slug: baker-example-page-template
 site_name: How has your climate changed
 locale: en_US
 
-headline: How Has Your Climate Changed?
+headline: How has your climate changed?
 
 [byline]
 name: Rhyannon Bartlett-Imadegawa
 url: https://rhyannonbartlettimadegawa.com/
-
 []
 
-pub_date: 2099-12-31 23:58:00
+pub_date: 2025-12-31 23:58:00
 update_date:
 
 seo_headline: How has your climate changed?

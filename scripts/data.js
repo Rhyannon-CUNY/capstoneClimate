@@ -1,26 +1,20 @@
 console.log('hello from data.js');
 
 import App from './components/App.svelte';
-// import Spring from './components/Spring.svelte';
-// import Summer from './components/Summer.svelte';
 
-import * as d3 from 'd3';
 import climate from '../_data/state_temps.json';
 import extremeHeatData from '../_data/extreme_heat_days.json';
 import extremeColdData from '../_data/extreme_cold_days.json';
 import seasonTiming from '../_data/frost.json';
-import disasterData from '../_data/disaster_freq.json';
-// import { get } from 'http';
-
-// using d3 for convenience, and storing a selected elements
-const scrollSections = d3.selectAll('#scroll2');
 
 // loop through each scroll section
 function init() {
   console.log('Hello init');
   new App({
     target: document.getElementById('app'),
-    props: {},
+    props: {
+      getPersonal: getPersonal,
+    },
   });
 }
 
@@ -542,11 +536,6 @@ function getSeasonTiming(state) {
     startWinter: stateData.startWinter,
     startSpring: stateData.startSpring,
   };
-}
-
-function showData() {
-  console.log('running ShowData');
-  const div = document.getElementById('results');
 }
 
 function getFreezeOrHot(state) {

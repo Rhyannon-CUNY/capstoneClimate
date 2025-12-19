@@ -5,7 +5,6 @@
   import Winter from './Winter.svelte';
   import Future from './Future.svelte';
   import Footnote from './Footnote.svelte';
-  import { getPersonal } from '../data.js';
   import { states } from './states.js';
   import { years } from './years.js';
 
@@ -18,6 +17,8 @@
   let futureData = null;
   let freezes = 'no';
   let hot = 'no';
+
+  export let getPersonal; // Function passed as a prop to get personal data
 
   // Form validation - disable submit button until both fields are selected
   $: isFormValid = state !== '' && birthYear !== '';
