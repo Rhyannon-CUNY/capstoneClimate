@@ -5,7 +5,7 @@
     hot100: 0,
     hot60: 0,
     hot2099: 0,
-    hotAtBirth: 0,
+    hotPast: 0,
     hotNow: 0,
     avgAtBirth: 0,
     avgNow: 0,
@@ -27,16 +27,16 @@
       <h1>Summer</h1>
       <div class="text-wrapper">
         {#if hot === 'yes'}
-          {#if dataRecord.hotAtBirth !== null && dataRecord.hotAtBirth > 0}
+          {#if dataRecord.hotPast !== null && dataRecord.hotPast > 0}
             <p>
-              There used to be <span class="data-value"
-                >{dataRecord.hotAtBirth} day{dataRecord.hotAtBirth !== 1 ? 's' : ''}</span
+              In the past, there were <span class="data-value"
+                >{dataRecord.hotPast} day{dataRecord.hotPast !== 1 ? 's' : ''}</span
               > above 95°F.
             </p>
           {/if}
-          {#if birthYear <= 2005 && dataRecord.hotNow !== null && dataRecord.hotAtBirth > 0}
+          {#if dataRecord.hotNow !== null && dataRecord.hotPast > 0}
             <p>
-              Over the next 15 years, <span class="data-value">{dataRecord.hotNow} day{dataRecord.hotNow !== 1 ? 's' : ''}</span> {dataRecord.hotNow === 1 ? 'is' : 'are'}  expected to be that hot.
+              Now <span class="data-value">{dataRecord.hotNow} day{dataRecord.hotNow !== 1 ? 's' : ''}</span> {dataRecord.hotNow === 1 ? 'is' : 'are'}  expected to be that hot.
             </p>
           {/if}
         {/if}
@@ -50,7 +50,7 @@
             >{dataRecord.avgAtBirth.toFixed(1)}°F
           </span>.
         </p>
-        {#if birthYear <= 2005 && dataRecord.avgNow - dataRecord.avgAtBirth >= 3}
+        {#if birthYear <= 2005}
           <p>This year it's <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.</p>
         {/if}
 

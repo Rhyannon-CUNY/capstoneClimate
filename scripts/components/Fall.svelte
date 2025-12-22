@@ -37,7 +37,7 @@
           >
           when you were born.
         </p>
-        {#if birthYear <= 2005 && dataRecord.avgNow - dataRecord.avgAtBirth >= 3}
+        {#if birthYear <= 2005}
           <p>These days it's
             <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.
           </p>

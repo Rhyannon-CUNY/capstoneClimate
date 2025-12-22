@@ -65,13 +65,7 @@ function getWinter(state, birthYear) {
   /* pull extreme cold days by age and the end of the century*/
   const coldDaysFuture = getColdDaysByAge(state, birthYear, [60, 100], [2099]);
   const milestones = coldDaysFuture?.milestones || [];
-  const freezingAtBirth = getDataForAgeInternal(
-    extremeColdData,
-    'extreme_cold_days',
-    state,
-    birthYear,
-    0
-  );
+  const freezingPast = getFreezingPast(state);
   const minAtBirth = seasonalAverage(stateData.tmin, birthYear, 'winter');
   const minNow = seasonalAverage(stateData.tmin, 2025, 'winter');
   const min1925 = seasonalMultiYearAverage(
@@ -111,7 +105,7 @@ function getWinter(state, birthYear) {
     minAtBirth: minAtBirth,
     minNow: minNow,
     freezingNow: getCurrentColdDays(state),
-    freezingAtBirth: freezingAtBirth,
+    freezingPast: freezingPast,
     freezing60: freezing60,
     freezing100: freezing100,
     freezing2099: freezing2099,
@@ -180,13 +174,7 @@ function getSummer(state, birthYear) {
   const stateData = climate[state];
   if (!stateData) return null;
   /* pull extreme heat days by age and the end of the century*/
-  const hotAtBirth = getDataForAgeInternal(
-    extremeHeatData,
-    'extreme_heat_days',
-    state,
-    birthYear,
-    0
-  );
+  const hotPast = getHotPast(state);
   const heatDaysFuture = getHeatDaysByAge(state, birthYear, [60, 100], [2099]);
   const milestones = heatDaysFuture?.milestones || [];
   const hot60 = milestones.find((m) => m.age === 60)?.days || null;
@@ -226,7 +214,7 @@ function getSummer(state, birthYear) {
     minAtBirth: seasonalAverage(stateData.tmin, birthYear, 'summer'),
     minNow: seasonalAverage(stateData.tmin, 2025, 'summer'),
     hotNow: getCurrentHeatDays(state),
-    hotAtBirth: hotAtBirth,
+    hotPast: hotPast,
     hot60: hot60,
     hot100: hot100,
     hot2099: hot2099,
@@ -662,6 +650,23 @@ function getCurrentExtremeDays(state, dataset, dataKey) {
   return stateData[dataKey]['2039'];
 }
 
+/**
+ * Get past extreme days (always uses 2005 data)
+ * @param {string} state - State name
+ * @param {object} dataset - The data object (extremeHeatData or extremeColdData)
+ * @param {string} dataKey - The key in the data object ('extreme_heat_days' or 'extreme_cold_days')
+ * @returns {number} Past extreme days (always using 2005 data)
+ */
+function getPastExtremeDays(state, dataset, dataKey) {
+  const stateData = dataset[state];
+  if (!stateData) {
+    return null;
+  }
+
+  // Always use 2005 data for past comparison
+  return stateData[dataKey]['2005'];
+}
+
 // Convenience wrapper functions for heat days
 function getHeatDaysByAge(
   state,
@@ -683,6 +688,10 @@ function getCurrentHeatDays(state) {
   return getCurrentExtremeDays(state, extremeHeatData, 'extreme_heat_days');
 }
 
+function getHotPast(state) {
+  return getPastExtremeDays(state, extremeHeatData, 'extreme_heat_days');
+}
+
 // Convenience wrapper functions for cold days
 function getColdDaysByAge(
   state,
@@ -702,6 +711,10 @@ function getColdDaysByAge(
 
 function getCurrentColdDays(state) {
   return getCurrentExtremeDays(state, extremeColdData, 'extreme_cold_days');
+}
+
+function getFreezingPast(state) {
+  return getPastExtremeDays(state, extremeColdData, 'extreme_cold_days');
 }
 
 /* Get season timing changes for a state
