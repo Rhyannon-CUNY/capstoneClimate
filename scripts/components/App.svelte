@@ -68,16 +68,16 @@
   </form>
   <section class="chart-container">
     {#if springData}
-      <Spring dataRecord={springData} />
+      <Spring dataRecord={springData} birthYear={birthYear} />
     {/if}
     {#if summerData}
-      <Summer dataRecord={summerData} {hot} />
+      <Summer dataRecord={summerData} {hot} birthYear={birthYear} />
     {/if}
     {#if fallData}
-      <Fall dataRecord={fallData} />
+      <Fall dataRecord={fallData} birthYear={birthYear} />
     {/if}
     {#if winterData}
-      <Winter dataRecord={winterData} {freezes} />
+      <Winter dataRecord={winterData} {freezes} birthYear={birthYear} />
     {/if}
     {#if futureData}
       <Future dataRecord={futureData} {hot} {freezes} />

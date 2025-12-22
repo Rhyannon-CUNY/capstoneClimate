@@ -10,6 +10,7 @@
     alternativeAvgAtBirth: null,
     alternativeAvgNow: null,
   };
+  export let birthYear = '';
   console.log('Fall dataRecord:', dataRecord);
 </script>
 
@@ -22,12 +23,12 @@
         {#if dataRecord.startWinter !== null && dataRecord.startWinter !== 0}
           <p>
             Winter is starting <span class="data-value"
-              >{Math.abs(dataRecord.startWinter)} days</span
+              >{Math.abs(dataRecord.startWinter)} day{Math.abs(dataRecord.startWinter) !== 1 ? 's' : ''}</span
               > {dataRecord.startWinter <
               0
                 ? 'earlier'
                 : 'later'}
-            than it used to. It's warmer for longer.
+            than in 1895. It's warmer for longer.
           </p>
         {/if}
         <p>
@@ -36,21 +37,29 @@
           >
           when you were born.
         </p>
-        {#if dataRecord.avgNow - dataRecord.avgAtBirth >= 3}
+        {#if birthYear <= 2005 && dataRecord.avgNow - dataRecord.avgAtBirth >= 3}
           <p>These days it's
             <span class="data-value">{dataRecord.avgNow.toFixed(1)}°F</span>.
           </p>
         {/if}
+        {#if birthYear >= 1950}
         <p>
           Going back 100 years, the average was <span
             class="data-value">{dataRecord.avg1925.toFixed(1)}°F</span
           >.
         </p>
-        {#if dataRecord.alternativeState && dataRecord.alternativeAvgAtBirth !== null && dataRecord.alternativeAvgNow !== null}
+        {/if}
+        {#if dataRecord.alternativeState && dataRecord.alternativeAvgAtBirth !== null}
           <p>
-            Some states have changed more. In <span class="data-value">{dataRecord.alternativeState}</span> fall temperatures have risen
-            from <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span>
-            to <span class="data-value">{dataRecord.alternativeAvgNow.toFixed(1)}°F</span> since you were born.
+            {#if birthYear > 2005}
+              Some states have changed a lot. In <span class="data-value">{dataRecord.alternativeState}</span> fall temperatures have risen
+              from <span class="data-value">{dataRecord.alternativeAvg1925?.toFixed(1)}°F</span>
+              to <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span> since 1925.
+            {:else}
+              Some states have changed a lot. In <span class="data-value">{dataRecord.alternativeState}</span> fall temperatures have risen
+              from <span class="data-value">{dataRecord.alternativeAvgAtBirth.toFixed(1)}°F</span>
+              to <span class="data-value">{dataRecord.alternativeAvgNow?.toFixed(1)}°F</span> since you were born.
+            {/if}
           </p>
         {/if}
       </div>

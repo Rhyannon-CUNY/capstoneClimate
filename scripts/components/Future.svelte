@@ -1,9 +1,9 @@
 <script>
   export let dataRecord = {
-    hot67: 0,
+    hot60: 0,
     hot100: 0,
     hot2099: 0,
-    freezing67: 0,
+    freezing60: 0,
     freezing100: 0,
     freezing2099: 0,
   };
@@ -42,7 +42,7 @@
           {/if}
           {#if freezes === 'yes' && dataRecord.freezing100 && dataRecord.freezing100 > 0}
             <p>
-              There'll be <span class="data-value">{dataRecord.freezing100}</span> day{dataRecord.freezing100 !== 1 ? 's' : ''} of extreme
+              There'll only be <span class="data-value">{dataRecord.freezing100}</span> day{dataRecord.freezing100 !== 1 ? 's' : ''} of extreme
               cold when you reach 100.
             </p>
           {/if}

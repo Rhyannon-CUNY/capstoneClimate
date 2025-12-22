@@ -99,9 +99,4 @@ export const years = [
   { Year: 2022 },
   { Year: 2023 },
   { Year: 2024 },
-  { Year: 2025 },
-  { Year: 2026 },
-  { Year: 2027 },
-  { Year: 2028 },
-  { Year: 2029 },
 ];
