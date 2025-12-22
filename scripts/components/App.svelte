@@ -64,7 +64,7 @@
         {/each}
       </select>
     </label>
-    <button type="submit" disabled={!isFormValid}>Your climate story</button>
+    <button type="submit" disabled={!isFormValid}>See your story</button>
   </form>
   <section class="chart-container">
     {#if springData}
